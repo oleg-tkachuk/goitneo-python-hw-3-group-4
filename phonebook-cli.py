@@ -1,6 +1,6 @@
 import os
 import sys
-from PhoneBook import Field, Name, Phone, Record, AddressBook
+from PhoneBook import Record, AddressBook
 
 # Function decorator for validating function arguments
 def validate_args(expected_arg_count, command_example):
@@ -28,8 +28,9 @@ def add_contact(args, contacts):
 def change_contact(args, contacts):
     name, phone = args
     record = contacts.find(name)
+    print(record)
     if record is not None:
-        old_phone = record.phones[0]
+        old_phone = record.phones[0].value
         record.edit_phone(old_phone, phone)
         return "[ok] Contact updated."
     else:
@@ -40,8 +41,10 @@ def change_contact(args, contacts):
 @validate_args(1, 'phone [name]')
 def show_phone(args, contacts):
     name = args[0]
-    if name in contacts:
-        return contacts[name]
+    record = contacts.find(name)
+    if record is not None:
+        phone = record.phones[0]
+        return f"Phone: {phone}"
     else:
         return "[info] Contact not found."
 
