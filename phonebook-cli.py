@@ -54,8 +54,7 @@ def show_phone(args, contacts):
 # Function for processing the "all" command
 def show_all(contacts):
     if contacts:
-        return "\n".join([f"{name}: {phone}" for name,
-                         phone in contacts.items()])
+        return "\n".join([f"\040" * 5 + f"{single_record}" for _, single_record in contacts.data.items()])
     else:
         return "[info] No contacts."
 
