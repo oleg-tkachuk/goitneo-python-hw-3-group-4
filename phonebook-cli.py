@@ -7,7 +7,7 @@ def validate_args(expected_arg_count, command_example):
     def decorator(func):
         def wrapper(*args):
             if len(args[0]) != expected_arg_count:
-                return f"Invalid command format. Please use '{command_example}'."
+                return f"[error] Invalid command format. Please use '{command_example}'."
             return func(*args)
         return wrapper
     return decorator
@@ -17,19 +17,23 @@ def validate_args(expected_arg_count, command_example):
 @validate_args(2, 'add [name] [phone]')
 def add_contact(args, contacts):
     name, phone = args
-    contacts[name] = phone
-    return "Contact added."
+    record = Record(name)
+    record.add_phone(phone)
+    contacts.add_record(record)
+    return "[ok] Contact added."
 
 
 # Function for processing the "change" command
 @validate_args(2, 'change [name] [phone]')
 def change_contact(args, contacts):
     name, phone = args
-    if name in contacts:
-        contacts[name] = phone
-        return "Contact updated."
+    record = contacts.find(name)
+    if record is not None:
+        old_phone = record.phones[0]
+        record.edit_phone(old_phone, phone)
+        return "[ok] Contact updated."
     else:
-        return "Contact not found."
+        return "[info] Contact not found."
 
 
 # Function for processing the "phone" command
@@ -39,7 +43,7 @@ def show_phone(args, contacts):
     if name in contacts:
         return contacts[name]
     else:
-        return "Contact not found."
+        return "[info] Contact not found."
 
 
 # Function for processing the "all" command
@@ -48,22 +52,25 @@ def show_all(contacts):
         return "\n".join([f"{name}: {phone}" for name,
                          phone in contacts.items()])
     else:
-        return "No contacts."
+        return "[info] No contacts."
 
+def help():
+    help = "[info] You can use the following commands: hello, add, change, phone, all, close, exit, help"
+    return help
 
 # The main function for user interaction
 def main():
+    contacts = AddressBook()
     # Starter dictionary for storing contacts
-    contacts = {}
-    print("Welcome to the assistant bot!")
+    print("[*] Welcome to the assistant bot!")
 
     while True:
-        user_input = input("Enter a command: ")
+        user_input = input("[*] Enter a command: ")
         command, *args = user_input.split()
         command = command.strip().lower()
 
         if command == "hello":
-            print("How can I help you?")
+            print("[*] How can I help you?")
         elif command.startswith("add"):
             print(add_contact(args, contacts))
         elif command.startswith("change"):
@@ -72,19 +79,21 @@ def main():
             print(show_phone(args, contacts))
         elif command == "all":
             print(show_all(contacts))
+        elif command == "help":
+            print(help())
         elif command in ["close", "exit"]:
-            print("Good bye!")
+            print("[*] Good bye!")
             break
         else:
-            print("Invalid command.")
+            print("[error] Invalid command.")
 
 
 # Main function
 if __name__ == '__main__':
     try:
         main()
-    except KeyboardInterrupt:
-        print('\nInterrupted')
+    except (KeyboardInterrupt, EOFError):
+        print('\n[*] Good bye!')
         try:
             sys.exit(130)
         except SystemExit:
