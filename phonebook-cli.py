@@ -3,6 +3,8 @@ import sys
 from PhoneBook import Record, AddressBook
 
 # Function decorator for validating function arguments
+
+
 def validate_args(expected_arg_count, command_example):
     def decorator(func):
         def wrapper(*args):
@@ -44,7 +46,7 @@ def show_phone(args, contacts):
     record = contacts.find(name)
     if record is not None:
         phone = record.phones[0]
-        return f"Phone: {phone}"
+        return f"[ok] Phone: {phone}"
     else:
         return "[info] Contact not found."
 
@@ -57,11 +59,14 @@ def show_all(contacts):
     else:
         return "[info] No contacts."
 
+
 def help():
     help = "[info] You can use the following commands: hello, add, change, phone, all, close, exit, help"
     return help
 
 # The main function for user interaction
+
+
 def main():
     contacts = AddressBook()
     # Starter dictionary for storing contacts
