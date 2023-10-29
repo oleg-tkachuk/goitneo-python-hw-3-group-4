@@ -68,8 +68,8 @@ def show_phone(args, contacts):
 
 
 # Function for processing the "all" command
-def show_all(contacts):
-    if contacts:
+def show_all(_, contacts):
+    if len(contacts.data.items()) !=0:
         return "\n".join(["{:<7} {:<1} {}".format('[ok]', '-', single_record)
                          for _, single_record in contacts.data.items()])
     else:
@@ -117,10 +117,34 @@ def show_next_week_birthdays(contacts):
 
 
 # Function of displaying information about available commands
-def help():
+def help(*_):
     help = "You can use the following commands: hello, add, change, phone, all, close, exit, help"
     return ("{:<7} {}".format('[info]', help))
 
+
+# Greeting display function
+def hello(*_):
+    return "{:<7} {}".format('[*]', 'How can I help you?')
+
+# Function of generating the KeyboardInterrupt interrupt for exit
+def exit(*_):
+    raise KeyboardInterrupt
+
+
+# Command mapping
+commands = {
+    'add': add_contact,
+    'change': change_contact,
+    'phone': show_phone,
+    'all': show_all,
+    'add-birthday': add_birthday,
+    'show-birthday': show_birthday,
+    'birthdays': show_next_week_birthdays,
+    'help': help,
+    'hello': hello,
+    'exit': exit,
+    'close': exit
+}
 
 # The main function for user interaction
 def main():
@@ -129,38 +153,21 @@ def main():
     print("{:<7} {}".format('[*]', 'Welcome to the assistant bot!'))
 
     while True:
-        # 'end_of_command_marker' -- this is a solution to distinguish between commands that share a common prefix.
-        # For example, the commands 'add' and 'add-birthday'.
-        end_of_command_marker = '_eocm_'
         try:
             user_input = input("{:<7} {}".format('[*]', 'Enter a command: '))
-            command, *args = user_input.split()
-            command = command.strip().lower() + end_of_command_marker
+            parts = user_input.strip().split()
+            try:
+                command = parts[0].lower()
+                args = parts[1:]
+            except IndexError:
+                continue
+            if command in commands:
+                result = commands[command](args, contacts)
+                print(result)
+            else:
+                print("{:<7} {}".format('[error]', 'Invalid command.'))
         except (ValueError, EOFError):
             continue
-        if command == "hello" + end_of_command_marker:
-            print("{:<7} {}".format('[*]', 'How can I help you?'))
-        elif command.startswith("add" + end_of_command_marker):
-            print(add_contact(args, contacts))
-        elif command.startswith("change" + end_of_command_marker):
-            print(change_contact(args, contacts))
-        elif command.startswith("phone" + end_of_command_marker):
-            print(show_phone(args, contacts))
-        elif command == "all" + end_of_command_marker:
-            print(show_all(contacts))
-        elif command.startswith("add-birthday" + end_of_command_marker):
-            print(add_birthday(args, contacts))
-        elif command.startswith("show-birthday" + end_of_command_marker):
-            print(show_birthday(args, contacts))
-        elif command == "birthdays" + end_of_command_marker:
-            print(show_next_week_birthdays(contacts))
-        elif command == "help" + end_of_command_marker:
-            print(help())
-        elif command in ["close" + end_of_command_marker, "exit" + end_of_command_marker]:
-            print("{:<7} {}".format('[*]', 'Good bye!'))
-            break
-        else:
-            print("{:<7} {}".format('[error]', 'Invalid command.'))
 
 
 # Main function
@@ -168,7 +175,7 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        print("{:<7} {}".format('\n[*]', 'Good bye!'))
+        print("{:<8} {}".format('\n[*]', 'Good bye!'))
         try:
             sys.exit(130)
         except SystemExit:
