@@ -79,9 +79,13 @@ class Record:
                 return p.value
         return None
 
-    # function to return the phone number(s)
+    # function to return the phone numbers
     def get_phones(self):
         return f"{'; '.join(str(p) for p in self.phones)}"
+
+    # function to return the phone number
+    def get_phone(self):
+        return f"{self.phones[0]}"
 
      # function of adding a birthday
     def add_birthday(self, birthday):
@@ -113,11 +117,11 @@ class AddressBook:
         if name in self.data:
             del self.data[name]
 
-    def get_birthdays_per_week(self, users):
+    def get_birthdays_per_week(self):
         birthday_dict = defaultdict(list)
         today = datetime.today().date()
 
-        for user in users:
+        for user in self.data:
             name = user["name"]
             birthday = user["birthday"].date()
             birthday_this_year = birthday.replace(year=today.year)

@@ -29,9 +29,8 @@ def add_contact(args, contacts):
 def change_contact(args, contacts):
     name, phone = args
     record = contacts.find(name)
-    print(record)
     if record is not None:
-        old_phone = record.phones[0].value
+        old_phone = record.get_phone()
         record.edit_phone(old_phone, phone)
         return "[ok] Contact updated."
     else:
