@@ -79,11 +79,11 @@ class Record:
                 return p.value
         return None
 
-    # function to return the phone numbers
+    # function to return multiple phone numbers
     def get_phones(self):
         return f"{'; '.join(str(p) for p in self.phones)}"
 
-    # function to return the phone number
+    # function to return the first phone number
     def get_phone(self):
         return f"{self.phones[0]}"
 
