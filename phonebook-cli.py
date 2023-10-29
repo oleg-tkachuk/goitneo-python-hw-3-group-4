@@ -96,7 +96,8 @@ def show_birthday(args, contacts):
 def show_next_week_birthdays(contacts):
     if contacts:
         return contacts.get_birthdays_per_week()
-    return "[info] No contacts."
+    else:
+        return "[info] No contacts."
 
 
 # Function of displaying information about available commands
