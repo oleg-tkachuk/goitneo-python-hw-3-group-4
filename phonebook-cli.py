@@ -2,6 +2,7 @@ import os
 import sys
 from PhoneBook import AddressBook, Record
 
+
 # Function decorator for validating function arguments
 def validate_args(expected_arg_count, command_example):
     def decorator(func):
@@ -78,8 +79,11 @@ def show_birthday(args, contacts):
     else:
         return "[info] Contact not found."
 
+
+# Function for processing the "birthdays" command
 def show_next_week_birthdays(contacts):
     return f"MOCK: SHOW NEXT WEEK BIRTHDAYS"
+
 
 # Function of displaying information about available commands
 def help():

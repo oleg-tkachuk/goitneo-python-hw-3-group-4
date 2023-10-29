@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 # The base class for record fields.
 class Field:
+    # class initialization
     def __init__(self, value):
         self.value = value
 
@@ -15,6 +16,7 @@ class Name(Field):
 
 # Class for storing a phone number
 class Phone(Field):
+    # class initialization
     def __init__(self, value):
         if not self.is_valid_phone(value):
             raise ValueError("Invalid phone number format. Must be 10 digits.")
@@ -27,6 +29,7 @@ class Phone(Field):
         return len(phone) == 10 and phone.isdigit()
 
 class Birthday(Field):
+    # class initialization
     def __init__(self, value):
         if not self.is_valid_birthday(value):
             raise ValueError("Incorrect date of birth format. It should be in the format DD.MM.YYYY")
@@ -44,6 +47,7 @@ class Birthday(Field):
 
 # Class for storing contact information, including name and phone list
 class Record:
+    # class initialization
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
@@ -75,12 +79,15 @@ class Record:
                 return p.value
         return None
 
+    # function to return the phone number(s)
     def get_phones(self):
         return f"{'; '.join(str(p) for p in self.phones)}"
 
+     # function of adding a birthday
     def add_birthday(self, birthday):
         if not self.birthday: self.birthday = Birthday(birthday)
 
+    # function to return the phone number
     def show_birthday(self):
         return self.birthday
 
@@ -89,6 +96,7 @@ class Record:
 
 # Class for storing and managing records
 class AddressBook:
+    # class initialization
     def __init__(self):
         self.data = {}
 
