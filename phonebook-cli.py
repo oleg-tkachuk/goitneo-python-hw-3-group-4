@@ -8,7 +8,7 @@ def validate_args(expected_arg_count, command_example):
     def decorator(func):
         def wrapper(*args):
             if len(args[0]) != expected_arg_count:
-                return f"[error] Invalid command format. Please use '{command_example}'."
+                return ("{:<7} {:<34} {}".format('[error]', "Invalid command format. Please use:", command_example))
             return func(*args)
         return wrapper
     return decorator
@@ -23,9 +23,9 @@ def add_contact(args, contacts):
         record.add_phone(phone)
         contacts.add_record(record)
     except ValueError as ve:
-        return f"[error] {ve}"
+        return ("{:<7} {}".format('[error]', ve))
     else:
-        return "[ok] Contact added."
+        return ("{:<7} {}".format('[ok]', 'Contact added.'))
 
 
 # Function for processing the "change" command
@@ -38,11 +38,11 @@ def change_contact(args, contacts):
         try:
             record.edit_phone(old_phone, phone)
         except ValueError as ve:
-            return f"[error] {ve}"
+            return ("{:<7} {}".format('[error]', ve))
         else:
-            return "[ok] Contact updated."
+            return ("{:<7} {}".format('[ok]', 'Contact updated.'))
     else:
-        return "[info] Contact not found."
+        return ("{:<7} {}".format('[info]', 'Contact not found.'))
 
 
 # Function for processing the "phone" command
@@ -51,10 +51,13 @@ def show_phone(args, contacts):
     name = args[0]
     record = contacts.find(name)
     if record is not None:
-        phone = record.get_phones()
-        return f"[ok] Phone(s): {phone}"
+        phone = record.get_phone()
+        if phone is not None:
+            return ("{:<7} {:<6} {}".format('[ok]', 'Phone:', phone))
+        else:
+            return ("{:<7} {:<6}".format('[info]', 'This user does not have a phone number'))
     else:
-        return "[info] Contact not found."
+        return ("{:<7} {}".format('[info]', 'Contact not found.'))
 
 
 # Function for processing the "all" command
@@ -63,7 +66,7 @@ def show_all(contacts):
         return "\n".join(
             [f"\040" * 5 + f"{single_record}" for _, single_record in contacts.data.items()])
     else:
-        return "[info] No contacts."
+        return ("{:<7} {}".format('[info]', 'No contacts.'))
 
 
 # Function for processing the "add-birthday" command
@@ -75,9 +78,9 @@ def add_birthday(args, contacts):
         record.add_birthday(birthday)
         contacts.add_record(record)
     except ValueError as ve:
-        return f"[error] {ve}"
+        return ("{:<7} {}".format('[error]', ve))
     else:
-        return "[ok] Birthday added."
+        return ("{:<7} {}".format('[ok]', 'Birthday added.'))
 
 
 # Function for processing the "show-birthday" command
@@ -87,9 +90,12 @@ def show_birthday(args, contacts):
     record = contacts.find(name)
     if record is not None:
         birthday = record.show_birthday()
-        return f"[ok] Birthday: {birthday}"
+        if birthday is not None:
+            return ("{:<7} {:<9} {}".format('[ok]', 'Birthday:', birthday))
+        else:
+            return ("{:<7} {}".format('[info]', 'This user has no record of their birthday'))
     else:
-        return "[info] Contact not found."
+        return ("{:<7} {}".format('[info]', 'Contact not found.'))
 
 
 # Function for processing the "birthdays" command
@@ -97,33 +103,33 @@ def show_next_week_birthdays(contacts):
     if contacts:
         return contacts.get_birthdays_per_week()
     else:
-        return "[info] No contacts."
+        return ("{:<7} {}".format('[info]', 'No contacts.'))
 
 
 # Function of displaying information about available commands
 def help():
-    help = "[info] You can use the following commands: hello, add, change, phone, all, close, exit, help"
-    return help
+    help = "You can use the following commands: hello, add, change, phone, all, close, exit, help"
+    return ("{:<7} {}".format('[info]', help))
 
 
 # The main function for user interaction
 def main():
     contacts = AddressBook()
 
-    print("[*] Welcome to the assistant bot!")
+    print("{:<7} {}".format('[*]', 'Welcome to the assistant bot!'))
 
     while True:
         # 'end_of_command_marker' -- this is a solution to distinguish between commands that share a common prefix.
         # For example, the commands 'add' and 'add-birthday'.
         end_of_command_marker = '_eocm_'
         try:
-            user_input = input("[*] Enter a command: ")
+            user_input = input("{:<7} {}".format('[*]', 'Enter a command: '))
             command, *args = user_input.split()
             command = command.strip().lower() + end_of_command_marker
         except (ValueError, EOFError):
             continue
         if command == "hello" + end_of_command_marker:
-            print("[*] How can I help you?")
+            print("{:<7} {}".format('[*]', 'How can I help you?'))
         elif command.startswith("add" + end_of_command_marker):
             print(add_contact(args, contacts))
         elif command.startswith("change" + end_of_command_marker):
@@ -141,10 +147,10 @@ def main():
         elif command == "help" + end_of_command_marker:
             print(help())
         elif command in ["close" + end_of_command_marker, "exit" + end_of_command_marker]:
-            print("[*] Good bye!")
+            print("{:<7} {}".format('[*]', 'Good bye!'))
             break
         else:
-            print("[error] Invalid command.")
+            print("{:<7} {}".format('[error]', 'Invalid command.'))
 
 
 # Main function
@@ -152,7 +158,7 @@ if __name__ == '__main__':
     try:
         main()
     except KeyboardInterrupt:
-        print('\n[*] Good bye!')
+        print("{:<7} {}".format('\n[*]', 'Good bye!'))
         try:
             sys.exit(130)
         except SystemExit:

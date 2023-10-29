@@ -86,7 +86,10 @@ class Record:
 
     # function to return the first phone number
     def get_phone(self):
-        return f"{self.phones[0]}"
+        if len(self.phones) != 0:
+            return self.phones[0]
+        else:
+            return None
 
      # function of adding a birthday
     def add_birthday(self, birthday):
@@ -94,10 +97,11 @@ class Record:
 
     # function to return the phone number
     def show_birthday(self):
-        return self.birthday
+        if self.birthday:
+            return self.birthday
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday}"
+        return f"| Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday} |"
 
 # Class for storing and managing records
 class AddressBook:
@@ -129,6 +133,8 @@ class AddressBook:
             user_record = self.data.get(user)
             name = user_record.name.value
             date_string = user_record.show_birthday()
+            if date_string is None:
+                continue
             birthday = datetime.strptime(date_string.value, '%d.%m.%Y').date()
 
             birthday_this_year = birthday.replace(year=today.year)
@@ -143,7 +149,8 @@ class AddressBook:
             birthday_dict[day_of_week].append(name)
 
         for day, names in birthday_dict.items():
-            formatted_record = f"\040" * 5 + f"{day}: {', '.join(names)}"
+            joined_names = ', '.join(names)
+            formatted_record = ("{:<7} {:<1} {}: {}".format('[ok]', '-', day, joined_names))
             formatted_data.append(formatted_record)
 
         return '\n'.join(formatted_data)
