@@ -23,8 +23,12 @@ def validate_args(expected_arg_count, command_example):
 def add_contact(args, contacts):
     try:
         name, phone = args
-        record = Record(name)
-        record.add_phone(phone)
+        record = contacts.find(name)
+        if record is None:
+            record = Record(name)
+            record.add_phone(phone)
+        else:
+            record.add_phone(phone)
         contacts.add_record(record)
     except ValueError as ve:
         return ("{:<7} {}".format('[error]', ve))
@@ -37,8 +41,10 @@ def add_contact(args, contacts):
 def change_contact(args, contacts):
     name, phone = args
     record = contacts.find(name)
+
     if record is not None:
-        old_phone = record.get_phone()
+        old_phone_record = record.get_phone()
+        old_phone = old_phone_record.value
         try:
             record.edit_phone(old_phone, phone)
         except ValueError as ve:
@@ -81,8 +87,12 @@ def show_all(_, contacts):
 def add_birthday(args, contacts):
     try:
         name, birthday = args
-        record = Record(name)
-        record.add_birthday(birthday)
+        record = contacts.find(name)
+        if record is None:
+            record = Record(name)
+            record.add_birthday(birthday)
+        else:
+            record.add_birthday(birthday)
         contacts.add_record(record)
     except ValueError as ve:
         return ("{:<7} {}".format('[error]', ve))

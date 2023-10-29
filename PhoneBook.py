@@ -55,7 +55,7 @@ class Birthday(Field):
 # Class for storing contact information, including name and phone list
 
 
-class Record:
+class Record(Phone):
     # class initialization
     def __init__(self, name):
         self.name = Name(name)
@@ -73,13 +73,12 @@ class Record:
 
     # function of editing a phone number
     def edit_phone(self, old_phone, new_phone):
-        if Phone.is_valid_phone(new_phone):
-            for phone in self.phones:
-                if phone.value == old_phone:
-                    phone.value = new_phone
-                    break
-        else:
+        if not self.is_valid_phone(new_phone):
             raise ValueError("Invalid phone number format. Must be 10 digits.")
+        for phone in self.phones:
+            if phone.value == old_phone:
+                phone.value = new_phone
+                break
 
     # phone number search function
     def find_phone(self, phone):
@@ -96,10 +95,9 @@ class Record:
     def get_phone(self):
         if len(self.phones) != 0:
             return self.phones[0]
-        else:
-            return None
 
      # function of adding a birthday
+
     def add_birthday(self, birthday):
         if not self.birthday:
             self.birthday = Birthday(birthday)
