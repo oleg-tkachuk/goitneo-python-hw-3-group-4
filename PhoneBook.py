@@ -1,3 +1,6 @@
+from collections import defaultdict
+from datetime import datetime, timedelta
+
 # The base class for record fields.
 class Field:
     def __init__(self, value):
@@ -75,3 +78,24 @@ class AddressBook:
     def delete(self, name):
         if name in self.data:
             del self.data[name]
+
+def get_birthdays_per_week(self, users):
+    birthday_dict = defaultdict(list)
+    today = datetime.today().date()
+
+    for user in users:
+        name = user["name"]
+        birthday = user["birthday"].date()
+        birthday_this_year = birthday.replace(year=today.year)
+
+        delta_days = (birthday_this_year - today).days
+
+        if delta_days < 7:
+            birthday_this_year = birthday_this_year.replace(year=today.year + 1)
+            delta_days = (birthday_this_year - today).days
+
+        day_of_week = (today + timedelta(days=delta_days)).strftime("%A")
+        birthday_dict[day_of_week].append(name)
+
+    for day, names in birthday_dict.items():
+        print(f"{day}: {', '.join(names)}")

@@ -1,10 +1,8 @@
 import os
 import sys
-from PhoneBook import Record, AddressBook
+from PhoneBook import AddressBook, Record
 
 # Function decorator for validating function arguments
-
-
 def validate_args(expected_arg_count, command_example):
     def decorator(func):
         def wrapper(*args):
@@ -58,34 +56,51 @@ def show_all(contacts):
     else:
         return "[info] No contacts."
 
+# Function for processing the "add-birthday" command
+@validate_args(2, 'add-birthday [name] [birthday]')
+def add_birthday(args, contacts):
+    return f"MOCK: ADD BIRTHDAY | ARGS: {args} | CONTACTS: {contacts}"
 
+# Function for processing the "show-birthday" command
+@validate_args(1, 'show-birthday [name]')
+def show_birthday(args, contacts):
+    name = args[0]
+    return f"MOCK: SHOW BIRTHDAY | NAME: {name} | CONTACTS: {contacts}"
+
+# Function of displaying information about available commands
 def help():
     help = "[info] You can use the following commands: hello, add, change, phone, all, close, exit, help"
     return help
 
+
 # The main function for user interaction
-
-
 def main():
     contacts = AddressBook()
-    # Starter dictionary for storing contacts
+
     print("[*] Welcome to the assistant bot!")
 
     while True:
+        # 'end_of_command_marker' -- this is a solution to distinguish between commands that share a common prefix.
+        # For example, the commands 'add' and 'add-birthday'.
+        end_of_command_marker = '_eocm_'
         user_input = input("[*] Enter a command: ")
         command, *args = user_input.split()
-        command = command.strip().lower()
+        command = command.strip().lower() + end_of_command_marker
 
         if command == "hello":
             print("[*] How can I help you?")
-        elif command.startswith("add"):
+        elif command.startswith("add" + end_of_command_marker):
             print(add_contact(args, contacts))
-        elif command.startswith("change"):
+        elif command.startswith("change" + end_of_command_marker):
             print(change_contact(args, contacts))
-        elif command.startswith("phone"):
+        elif command.startswith("phone" + end_of_command_marker):
             print(show_phone(args, contacts))
         elif command == "all":
             print(show_all(contacts))
+        elif command.startswith("add-birthday" + end_of_command_marker):
+            print(add_birthday(args, contacts))
+        elif command.startswith("show-birthday" + end_of_command_marker):
+            print(show_birthday(args, contacts))
         elif command == "help":
             print(help())
         elif command in ["close", "exit"]:
@@ -93,6 +108,7 @@ def main():
             break
         else:
             print("[error] Invalid command.")
+            print(f"INVALIDA COMMAND: [{command}]")
 
 
 # Main function
