@@ -17,11 +17,15 @@ def validate_args(expected_arg_count, command_example):
 # Function for processing the "add" command
 @validate_args(2, 'add [name] [phone]')
 def add_contact(args, contacts):
-    name, phone = args
-    record = Record(name)
-    record.add_phone(phone)
-    contacts.add_record(record)
-    return "[ok] Contact added."
+    try:
+        name, phone = args
+        record = Record(name)
+        record.add_phone(phone)
+        contacts.add_record(record)
+    except ValueError as ve:
+        return f"[error] {ve}"
+    else:
+        return "[ok] Contact added."
 
 
 # Function for processing the "change" command
@@ -31,8 +35,12 @@ def change_contact(args, contacts):
     record = contacts.find(name)
     if record is not None:
         old_phone = record.get_phone()
-        record.edit_phone(old_phone, phone)
-        return "[ok] Contact updated."
+        try:
+            record.edit_phone(old_phone, phone)
+        except ValueError as ve:
+            return f"[error] {ve}"
+        else:
+            return "[ok] Contact updated."
     else:
         return "[info] Contact not found."
 
@@ -61,11 +69,15 @@ def show_all(contacts):
 # Function for processing the "add-birthday" command
 @validate_args(2, 'add-birthday [name] [birthday]')
 def add_birthday(args, contacts):
-    name, birthday = args
-    record = Record(name)
-    record.add_birthday(birthday)
-    contacts.add_record(record)
-    return "[ok] Birthday added."
+    try:
+        name, birthday = args
+        record = Record(name)
+        record.add_birthday(birthday)
+        contacts.add_record(record)
+    except ValueError as ve:
+        return f"[error] {ve}"
+    else:
+        return "[ok] Birthday added."
 
 
 # Function for processing the "show-birthday" command
