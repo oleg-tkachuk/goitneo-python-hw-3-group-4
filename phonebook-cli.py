@@ -109,7 +109,7 @@ def show_birthday(args, contacts):
 
 
 # Function for processing the "birthdays" command
-def show_next_week_birthdays(contacts):
+def show_next_week_birthdays(_, contacts):
     if contacts:
         return contacts.get_birthdays_per_week()
     else:
@@ -118,7 +118,7 @@ def show_next_week_birthdays(contacts):
 
 # Function of displaying information about available commands
 def help(*_):
-    help = "You can use the following commands: hello, add, change, phone, all, close, exit, help"
+    help = "You can use the following commands: all, add, phone, change, add-birthday, show-birthday, birthdays, close, exit, hello, help"
     return ("{:<7} {}".format('[info]', help))
 
 
@@ -148,6 +148,8 @@ commands = {
 }
 
 # The main function for user interaction
+
+
 def main():
     contacts = AddressBook()
 
