@@ -43,8 +43,8 @@ def show_phone(args, contacts):
     name = args[0]
     record = contacts.find(name)
     if record is not None:
-        phone = record.phones[0]
-        return f"[ok] Phone: {phone}"
+        phone = record.get_phones()
+        return f"[ok] Phone(s): {phone}"
     else:
         return "[info] Contact not found."
 
@@ -56,10 +56,16 @@ def show_all(contacts):
     else:
         return "[info] No contacts."
 
+
 # Function for processing the "add-birthday" command
 @validate_args(2, 'add-birthday [name] [birthday]')
 def add_birthday(args, contacts):
-    return f"MOCK: ADD BIRTHDAY | ARGS: {args} | CONTACTS: {contacts}"
+    name, birthday = args
+    record = Record(name)
+    record.add_birthday(birthday)
+    contacts.add_record(record)
+    return "[ok] Birthday added."
+
 
 # Function for processing the "show-birthday" command
 @validate_args(1, 'show-birthday [name]')
@@ -90,7 +96,7 @@ def main():
         command, *args = user_input.split()
         command = command.strip().lower() + end_of_command_marker
 
-        if command == "hello":
+        if command == "hello" + end_of_command_marker:
             print("[*] How can I help you?")
         elif command.startswith("add" + end_of_command_marker):
             print(add_contact(args, contacts))

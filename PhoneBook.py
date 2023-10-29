@@ -26,11 +26,28 @@ class Phone(Field):
     def is_valid_phone(phone):
         return len(phone) == 10 and phone.isdigit()
 
+class Birthday(Field):
+    def __init__(self, value):
+        if not self.is_valid_birthday(value):
+            raise ValueError("Incorrect date of birth format. It should be in the format DD.MM.YYYY")
+        super().__init__(value)
+
+    # returns a static method for the `is_valid_birthday(birthday)` method function
+    # function of validating the date of birth
+    @staticmethod
+    def is_valid_birthday(birthday):
+        try:
+            datetime.strptime(birthday, '%d.%m.%Y')
+            return True
+        except ValueError:
+            return False
+
 # Class for storing contact information, including name and phone list
 class Record:
     def __init__(self, name):
         self.name = Name(name)
         self.phones = []
+        self.birthday = str()
 
     # function of adding a phone number
     def add_phone(self, phone):
@@ -58,8 +75,17 @@ class Record:
                 return p.value
         return None
 
+    def get_phones(self):
+        return f"{'; '.join(str(p) for p in self.phones)}"
+
+    def add_birthday(self, birthday):
+        if not self.birthday: self.birthday = Birthday(birthday)
+
+    def show_birthday(self, name):
+        return None
+
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}"
+        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday.value}"
 
 # Class for storing and managing records
 class AddressBook:
@@ -79,23 +105,24 @@ class AddressBook:
         if name in self.data:
             del self.data[name]
 
-def get_birthdays_per_week(self, users):
-    birthday_dict = defaultdict(list)
-    today = datetime.today().date()
+    def get_birthdays_per_week(self, users):
+        birthday_dict = defaultdict(list)
+        today = datetime.today().date()
 
-    for user in users:
-        name = user["name"]
-        birthday = user["birthday"].date()
-        birthday_this_year = birthday.replace(year=today.year)
+        for user in users:
+            name = user["name"]
+            birthday = user["birthday"].date()
+            birthday_this_year = birthday.replace(year=today.year)
 
-        delta_days = (birthday_this_year - today).days
-
-        if delta_days < 7:
-            birthday_this_year = birthday_this_year.replace(year=today.year + 1)
             delta_days = (birthday_this_year - today).days
 
-        day_of_week = (today + timedelta(days=delta_days)).strftime("%A")
-        birthday_dict[day_of_week].append(name)
+            if delta_days < 7:
+                birthday_this_year = birthday_this_year.replace(year=today.year + 1)
+                delta_days = (birthday_this_year - today).days
 
-    for day, names in birthday_dict.items():
-        print(f"{day}: {', '.join(names)}")
+            day_of_week = (today + timedelta(days=delta_days)).strftime("%A")
+            birthday_dict[day_of_week].append(name)
+
+        for day, names in birthday_dict.items():
+            print(f"{day}: {', '.join(names)}")
+
