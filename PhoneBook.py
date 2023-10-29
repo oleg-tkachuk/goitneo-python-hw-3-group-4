@@ -12,10 +12,14 @@ class Field:
         return str(self.value)
 
 # Class for storing a contact name
+
+
 class Name(Field):
     pass
 
 # Class for storing a phone number
+
+
 class Phone(Field):
     # class initialization
     def __init__(self, value):
@@ -29,11 +33,13 @@ class Phone(Field):
     def is_valid_phone(phone):
         return len(phone) == 10 and phone.isdigit()
 
+
 class Birthday(Field):
     # class initialization
     def __init__(self, value):
         if not self.is_valid_birthday(value):
-            raise ValueError("Incorrect date of birth format. It should be in the format DD.MM.YYYY")
+            raise ValueError(
+                "Incorrect date of birth format. It should be in the format DD.MM.YYYY")
         super().__init__(value)
 
     # returns a static method for the `is_valid_birthday(birthday)` method function
@@ -47,6 +53,8 @@ class Birthday(Field):
             return False
 
 # Class for storing contact information, including name and phone list
+
+
 class Record:
     # class initialization
     def __init__(self, name):
@@ -93,7 +101,8 @@ class Record:
 
      # function of adding a birthday
     def add_birthday(self, birthday):
-        if not self.birthday: self.birthday = Birthday(birthday)
+        if not self.birthday:
+            self.birthday = Birthday(birthday)
 
     # function to return the phone number
     def show_birthday(self):
@@ -104,6 +113,8 @@ class Record:
         return f"| Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday} |"
 
 # Class for storing and managing records
+
+
 class AddressBook:
     # class initialization
     def __init__(self):
@@ -122,8 +133,9 @@ class AddressBook:
         if name in self.data:
             del self.data[name]
 
+    # Returns the users you want to congratulate by the days of the following
+    # week.
 
-    # Returns the users you want to congratulate by the days of the following week.
     def get_birthdays_per_week(self):
         birthday_dict = defaultdict(list)
         today = datetime.today().date()
@@ -142,7 +154,8 @@ class AddressBook:
             delta_days = (birthday_this_year - today).days
 
             if delta_days < 7:
-                birthday_this_year = birthday_this_year.replace(year=today.year + 1)
+                birthday_this_year = birthday_this_year.replace(
+                    year=today.year + 1)
                 delta_days = (birthday_this_year - today).days
 
             day_of_week = (today + timedelta(days=delta_days)).strftime("%A")
@@ -150,8 +163,9 @@ class AddressBook:
 
         for day, names in birthday_dict.items():
             joined_names = ', '.join(names)
-            formatted_record = ("{:<7} {:<1} {}: {}".format('[ok]', '-', day, joined_names))
+            formatted_record = (
+                "{:<7} {:<1} {}: {}".format(
+                    '[ok]', '-', day, joined_names))
             formatted_data.append(formatted_record)
 
         return '\n'.join(formatted_data)
-

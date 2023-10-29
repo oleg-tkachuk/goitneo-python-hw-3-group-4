@@ -8,7 +8,11 @@ def validate_args(expected_arg_count, command_example):
     def decorator(func):
         def wrapper(*args):
             if len(args[0]) != expected_arg_count:
-                return ("{:<7} {:<34} {}".format('[error]', "Invalid command format. Please use:", command_example))
+                return (
+                    "{:<7} {:<34} {}".format(
+                        '[error]',
+                        "Invalid command format. Please use:",
+                        command_example))
             return func(*args)
         return wrapper
     return decorator
@@ -55,7 +59,10 @@ def show_phone(args, contacts):
         if phone is not None:
             return ("{:<7} {:<6} {}".format('[ok]', 'Phone:', phone))
         else:
-            return ("{:<7} {:<6}".format('[info]', 'This user does not have a phone number'))
+            return (
+                "{:<7} {:<6}".format(
+                    '[info]',
+                    'This user does not have a phone number'))
     else:
         return ("{:<7} {}".format('[info]', 'Contact not found.'))
 
@@ -93,7 +100,10 @@ def show_birthday(args, contacts):
         if birthday is not None:
             return ("{:<7} {:<9} {}".format('[ok]', 'Birthday:', birthday))
         else:
-            return ("{:<7} {}".format('[info]', 'This user has no record of their birthday'))
+            return (
+                "{:<7} {}".format(
+                    '[info]',
+                    'This user has no record of their birthday'))
     else:
         return ("{:<7} {}".format('[info]', 'Contact not found.'))
 
