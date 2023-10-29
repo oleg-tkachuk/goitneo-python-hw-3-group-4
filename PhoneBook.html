@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module PhoneBook</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title">PhoneBook</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:PhoneBook.py">PhoneBook.py</a></td></tr></table>
+    <p></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="PhoneBook.html#AddressBook">AddressBook</a>
+</dt><dt class="heading-text"><a href="PhoneBook.html#Field">Field</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="PhoneBook.html#Birthday">Birthday</a>
+</dt><dt class="heading-text"><a href="PhoneBook.html#Name">Name</a>
+</dt><dt class="heading-text"><a href="PhoneBook.html#Phone">Phone</a>
+</dt></dl>
+</dd>
+<dt class="heading-text"><a href="PhoneBook.html#Record">Record</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="AddressBook">class <strong>AddressBook</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">#&nbsp;Class&nbsp;for&nbsp;storing&nbsp;and&nbsp;managing&nbsp;records<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="AddressBook-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="AddressBook-add_record"><strong>add_record</strong></a>(self, record)</dt><dd><span class="code">#&nbsp;function&nbsp;of&nbsp;adding&nbsp;a&nbsp;record</span></dd></dl>
+
+<dl><dt><a name="AddressBook-delete"><strong>delete</strong></a>(self, name)</dt><dd><span class="code">#&nbsp;record&nbsp;deletion&nbsp;function</span></dd></dl>
+
+<dl><dt><a name="AddressBook-find"><strong>find</strong></a>(self, name)</dt><dd><span class="code">#&nbsp;record&nbsp;search&nbsp;function</span></dd></dl>
+
+<dl><dt><a name="AddressBook-get_birthdays_per_week"><strong>get_birthdays_per_week</strong></a>(self)</dt><dd><span class="code">#&nbsp;Returns&nbsp;the&nbsp;users&nbsp;you&nbsp;want&nbsp;to&nbsp;congratulate&nbsp;by&nbsp;the&nbsp;days&nbsp;of&nbsp;the&nbsp;following&nbsp;week.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Birthday">class <strong>Birthday</strong></a>(<a href="PhoneBook.html#Field">Field</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Birthday">Birthday</a>(value)<br>
+&nbsp;<br>
+<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PhoneBook.html#Birthday">Birthday</a></dd>
+<dd><a href="PhoneBook.html#Field">Field</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Birthday-__init__"><strong>__init__</strong></a>(self, value)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Birthday-is_valid_birthday"><strong>is_valid_birthday</strong></a>(birthday)</dt><dd><span class="code">#&nbsp;returns&nbsp;a&nbsp;static&nbsp;method&nbsp;for&nbsp;the&nbsp;`<a href="#Birthday-is_valid_birthday">is_valid_birthday</a>(birthday)`&nbsp;method&nbsp;function<br>
+#&nbsp;function&nbsp;of&nbsp;validating&nbsp;the&nbsp;date&nbsp;of&nbsp;birth</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="PhoneBook.html#Field">Field</a>:<br>
+<dl><dt><a name="Birthday-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="PhoneBook.html#Field">Field</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Field">class <strong>Field</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Field">Field</a>(value)<br>
+&nbsp;<br>
+#&nbsp;The&nbsp;base&nbsp;class&nbsp;for&nbsp;record&nbsp;fields.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Field-__init__"><strong>__init__</strong></a>(self, value)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Field-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Name">class <strong>Name</strong></a>(<a href="PhoneBook.html#Field">Field</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Name">Name</a>(value)<br>
+&nbsp;<br>
+#&nbsp;Class&nbsp;for&nbsp;storing&nbsp;a&nbsp;contact&nbsp;name<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PhoneBook.html#Name">Name</a></dd>
+<dd><a href="PhoneBook.html#Field">Field</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods inherited from <a href="PhoneBook.html#Field">Field</a>:<br>
+<dl><dt><a name="Name-__init__"><strong>__init__</strong></a>(self, value)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Name-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="PhoneBook.html#Field">Field</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Phone">class <strong>Phone</strong></a>(<a href="PhoneBook.html#Field">Field</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Phone">Phone</a>(value)<br>
+&nbsp;<br>
+#&nbsp;Class&nbsp;for&nbsp;storing&nbsp;a&nbsp;phone&nbsp;number<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="PhoneBook.html#Phone">Phone</a></dd>
+<dd><a href="PhoneBook.html#Field">Field</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Phone-__init__"><strong>__init__</strong></a>(self, value)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Phone-is_valid_phone"><strong>is_valid_phone</strong></a>(phone)</dt><dd><span class="code">#&nbsp;returns&nbsp;a&nbsp;static&nbsp;method&nbsp;for&nbsp;the&nbsp;`<a href="#Phone-is_valid_phone">is_valid_phone</a>(phone)`&nbsp;method&nbsp;function<br>
+#&nbsp;function&nbsp;for&nbsp;phone&nbsp;number&nbsp;validation</span></dd></dl>
+
+<hr>
+Methods inherited from <a href="PhoneBook.html#Field">Field</a>:<br>
+<dl><dt><a name="Phone-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="PhoneBook.html#Field">Field</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Record">class <strong>Record</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Record">Record</a>(name)<br>
+&nbsp;<br>
+#&nbsp;Class&nbsp;for&nbsp;storing&nbsp;contact&nbsp;information,&nbsp;including&nbsp;name&nbsp;and&nbsp;phone&nbsp;list<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="Record-__init__"><strong>__init__</strong></a>(self, name)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="Record-__str__"><strong>__str__</strong></a>(self)</dt><dd><span class="code">Return&nbsp;str(self).</span></dd></dl>
+
+<dl><dt><a name="Record-add_birthday"><strong>add_birthday</strong></a>(self, birthday)</dt></dl>
+
+<dl><dt><a name="Record-add_phone"><strong>add_phone</strong></a>(self, phone)</dt><dd><span class="code">#&nbsp;function&nbsp;of&nbsp;adding&nbsp;a&nbsp;phone&nbsp;number</span></dd></dl>
+
+<dl><dt><a name="Record-edit_phone"><strong>edit_phone</strong></a>(self, old_phone, new_phone)</dt><dd><span class="code">#&nbsp;function&nbsp;of&nbsp;editing&nbsp;a&nbsp;phone&nbsp;number</span></dd></dl>
+
+<dl><dt><a name="Record-find_phone"><strong>find_phone</strong></a>(self, phone)</dt><dd><span class="code">#&nbsp;phone&nbsp;number&nbsp;search&nbsp;function</span></dd></dl>
+
+<dl><dt><a name="Record-get_phone"><strong>get_phone</strong></a>(self)</dt><dd><span class="code">#&nbsp;function&nbsp;to&nbsp;return&nbsp;the&nbsp;first&nbsp;phone&nbsp;number</span></dd></dl>
+
+<dl><dt><a name="Record-get_phones"><strong>get_phones</strong></a>(self)</dt><dd><span class="code">#&nbsp;function&nbsp;to&nbsp;return&nbsp;multiple&nbsp;phone&nbsp;numbers</span></dd></dl>
+
+<dl><dt><a name="Record-remove_phone"><strong>remove_phone</strong></a>(self, phone)</dt><dd><span class="code">#&nbsp;phone&nbsp;number&nbsp;deletion&nbsp;function</span></dd></dl>
+
+<dl><dt><a name="Record-show_birthday"><strong>show_birthday</strong></a>(self)</dt><dd><span class="code">#&nbsp;function&nbsp;to&nbsp;return&nbsp;the&nbsp;phone&nbsp;number</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>
