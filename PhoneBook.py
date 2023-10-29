@@ -1,6 +1,7 @@
 from collections import defaultdict
 from datetime import datetime, timedelta
 
+
 # The base class for record fields.
 class Field:
     # class initialization
@@ -117,13 +118,19 @@ class AddressBook:
         if name in self.data:
             del self.data[name]
 
+
+    # Returns the users you want to congratulate by the days of the following week.
     def get_birthdays_per_week(self):
         birthday_dict = defaultdict(list)
         today = datetime.today().date()
+        formatted_data = []
 
-        for user in self.data:
-            name = user["name"]
-            birthday = user["birthday"].date()
+        for user in self.data.keys():
+            user_record = self.data.get(user)
+            name = user_record.name.value
+            date_string = user_record.show_birthday()
+            birthday = datetime.strptime(date_string.value, '%d.%m.%Y').date()
+
             birthday_this_year = birthday.replace(year=today.year)
 
             delta_days = (birthday_this_year - today).days
@@ -136,5 +143,8 @@ class AddressBook:
             birthday_dict[day_of_week].append(name)
 
         for day, names in birthday_dict.items():
-            print(f"{day}: {', '.join(names)}")
+            formatted_record = f"\040" * 5 + f"{day}: {', '.join(names)}"
+            formatted_data.append(formatted_record)
+
+        return '\n'.join(formatted_data)
 

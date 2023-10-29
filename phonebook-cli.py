@@ -81,7 +81,9 @@ def show_birthday(args, contacts):
 
 # Function for processing the "birthdays" command
 def show_next_week_birthdays(contacts):
-    return f"MOCK: SHOW NEXT WEEK BIRTHDAYS"
+    if contacts:
+        return contacts.get_birthdays_per_week()
+    return "[info] No contacts."
 
 
 # Function of displaying information about available commands
@@ -100,10 +102,12 @@ def main():
         # 'end_of_command_marker' -- this is a solution to distinguish between commands that share a common prefix.
         # For example, the commands 'add' and 'add-birthday'.
         end_of_command_marker = '_eocm_'
-        user_input = input("[*] Enter a command: ")
-        command, *args = user_input.split()
-        command = command.strip().lower() + end_of_command_marker
-
+        try:
+            user_input = input("[*] Enter a command: ")
+            command, *args = user_input.split()
+            command = command.strip().lower() + end_of_command_marker
+        except (ValueError, EOFError):
+            continue
         if command == "hello" + end_of_command_marker:
             print("[*] How can I help you?")
         elif command.startswith("add" + end_of_command_marker):
@@ -133,7 +137,7 @@ def main():
 if __name__ == '__main__':
     try:
         main()
-    except (KeyboardInterrupt, EOFError):
+    except KeyboardInterrupt:
         print('\n[*] Good bye!')
         try:
             sys.exit(130)
