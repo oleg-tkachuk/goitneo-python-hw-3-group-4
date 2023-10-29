@@ -67,6 +67,9 @@ def show_birthday(args, contacts):
     name = args[0]
     return f"MOCK: SHOW BIRTHDAY | NAME: {name} | CONTACTS: {contacts}"
 
+def show_next_week_birthdays(contacts):
+    return f"MOCK: SHOW NEXT WEEK BIRTHDAYS"
+
 # Function of displaying information about available commands
 def help():
     help = "[info] You can use the following commands: hello, add, change, phone, all, close, exit, help"
@@ -95,20 +98,21 @@ def main():
             print(change_contact(args, contacts))
         elif command.startswith("phone" + end_of_command_marker):
             print(show_phone(args, contacts))
-        elif command == "all":
+        elif command == "all" + end_of_command_marker:
             print(show_all(contacts))
         elif command.startswith("add-birthday" + end_of_command_marker):
             print(add_birthday(args, contacts))
         elif command.startswith("show-birthday" + end_of_command_marker):
             print(show_birthday(args, contacts))
-        elif command == "help":
+        elif command == "birthdays" + end_of_command_marker:
+            print(show_next_week_birthdays(contacts))
+        elif command == "help" + end_of_command_marker:
             print(help())
-        elif command in ["close", "exit"]:
+        elif command in ["close" + end_of_command_marker, "exit" + end_of_command_marker]:
             print("[*] Good bye!")
             break
         else:
             print("[error] Invalid command.")
-            print(f"INVALIDA COMMAND: [{command}]")
 
 
 # Main function
