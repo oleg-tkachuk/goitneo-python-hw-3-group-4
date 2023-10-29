@@ -69,7 +69,7 @@ def show_phone(args, contacts):
 
 # Function for processing the "all" command
 def show_all(_, contacts):
-    if len(contacts.data.items()) !=0:
+    if len(contacts.data.items()) != 0:
         return "\n".join(["{:<7} {:<1} {}".format('[ok]', '-', single_record)
                          for _, single_record in contacts.data.items()])
     else:
@@ -127,6 +127,8 @@ def hello(*_):
     return "{:<7} {}".format('[*]', 'How can I help you?')
 
 # Function of generating the KeyboardInterrupt interrupt for exit
+
+
 def exit(*_):
     raise KeyboardInterrupt
 
@@ -147,6 +149,8 @@ commands = {
 }
 
 # The main function for user interaction
+
+
 def main():
     contacts = AddressBook()
 
