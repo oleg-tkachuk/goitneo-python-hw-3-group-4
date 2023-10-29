@@ -126,9 +126,8 @@ def help(*_):
 def hello(*_):
     return "{:<7} {}".format('[*]', 'How can I help you?')
 
+
 # Function of generating the KeyboardInterrupt interrupt for exit
-
-
 def exit(*_):
     raise KeyboardInterrupt
 
@@ -149,8 +148,6 @@ commands = {
 }
 
 # The main function for user interaction
-
-
 def main():
     contacts = AddressBook()
 
