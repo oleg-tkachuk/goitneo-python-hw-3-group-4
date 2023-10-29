@@ -96,7 +96,7 @@ class Record:
         return self.birthday
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday.value}"
+        return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday}"
 
 # Class for storing and managing records
 class AddressBook:
