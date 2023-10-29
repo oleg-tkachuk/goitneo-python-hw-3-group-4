@@ -81,8 +81,8 @@ class Record:
     def add_birthday(self, birthday):
         if not self.birthday: self.birthday = Birthday(birthday)
 
-    def show_birthday(self, name):
-        return None
+    def show_birthday(self):
+        return self.birthday
 
     def __str__(self):
         return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday.value}"

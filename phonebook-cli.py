@@ -71,7 +71,12 @@ def add_birthday(args, contacts):
 @validate_args(1, 'show-birthday [name]')
 def show_birthday(args, contacts):
     name = args[0]
-    return f"MOCK: SHOW BIRTHDAY | NAME: {name} | CONTACTS: {contacts}"
+    record = contacts.find(name)
+    if record is not None:
+        birthday = record.show_birthday()
+        return f"[ok] Birthday: {birthday}"
+    else:
+        return "[info] Contact not found."
 
 def show_next_week_birthdays(contacts):
     return f"MOCK: SHOW NEXT WEEK BIRTHDAYS"
