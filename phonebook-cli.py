@@ -158,8 +158,6 @@ commands = {
 }
 
 # The main function for user interaction
-
-
 def main():
     contacts = AddressBook()
 

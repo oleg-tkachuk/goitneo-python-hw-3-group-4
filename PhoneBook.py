@@ -12,14 +12,10 @@ class Field:
         return str(self.value)
 
 # Class for storing a contact name
-
-
 class Name(Field):
     pass
 
 # Class for storing a phone number
-
-
 class Phone(Field):
     # class initialization
     def __init__(self, value):
@@ -53,8 +49,6 @@ class Birthday(Field):
             return False
 
 # Class for storing contact information, including name and phone list
-
-
 class Record(Phone):
     # class initialization
     def __init__(self, name):
@@ -96,7 +90,6 @@ class Record(Phone):
             return self.phones[0]
 
      # function of adding a birthday
-
     def add_birthday(self, birthday):
         if not self.birthday:
             self.birthday = Birthday(birthday)
@@ -110,8 +103,6 @@ class Record(Phone):
         return f"Contact name: {self.name.value}, phones: {'; '.join(str(p) for p in self.phones)}, birthday: {self.birthday}"
 
 # Class for storing and managing records
-
-
 class AddressBook:
     # class initialization
     def __init__(self):
@@ -132,7 +123,6 @@ class AddressBook:
 
     # Returns the users you want to congratulate by the days of the following
     # week.
-
     def get_birthdays_per_week(self):
         birthday_dict = defaultdict(list)
         today = datetime.today().date()
