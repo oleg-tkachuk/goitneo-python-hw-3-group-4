@@ -73,8 +73,7 @@ class Record(Phone):
 
     # function of editing a phone number
     def edit_phone(self, old_phone, new_phone):
-        if not self.is_valid_phone(new_phone):
-            raise ValueError("Invalid phone number format. Must be 10 digits.")
+        new_phone = Phone(new_phone)
         for phone in self.phones:
             if phone.value == old_phone:
                 phone.value = new_phone
